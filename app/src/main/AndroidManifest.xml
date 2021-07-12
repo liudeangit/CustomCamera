@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.axs.camera">
+    <!-- 增加网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 增加文件存储和访问摄像头的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 闪光灯权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- region 适配全面屏 -->
+    <meta-data
+        android:name="android.max_aspect"
+        android:value="2.4" /> <!-- 刘海屏适配 -->
+    <!--
+由于目前市面上刘海屏各家一套，没有按照Android P官方进行适配，所以暂时不做刘海屏适配处理。
+    大部分厂家都已经对没有适配刘海屏的应用有自己的一套处理逻辑，我们的应用基本可以在大部分刘海屏手机上正常显示！
+    -->
+    <!-- 华为刘海区域展示 -->
+    <meta-data
+        android:name="android.notch_support"
+        android:value="true" /> <!-- 小米刘海区域展示 -->
+    <meta-data
+        android:name="notch.config"
+        android:value="portrait" />
+
+    <application
+        android:allowBackup="true"
+        android:requestLegacyExternalStorage="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Camera">
+        <activity android:name=".MainActivity3"></activity>
+        <activity android:name=".MainActivity2" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/file_provider_paths"-->
+<!--                tools:replace="android:resource" />-->
+<!--        </provider>-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.cameraalbumtests.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+    </application>
+
+</manifest>
